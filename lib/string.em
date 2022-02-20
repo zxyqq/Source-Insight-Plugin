@@ -261,10 +261,7 @@ macro GetWordInAString(text,pos,flag)
 		{
 			if(ch != 2)
 			{
-				ret = nil
-				ret.word = strmid(text,pos1,pos);
-				ret.position = pos
-				return ret
+				break;
 			}
 		}
 		pos = pos + 1
@@ -274,9 +271,29 @@ macro GetWordInAString(text,pos,flag)
 		return nil;
 	}
 
+	//do it again
+	pos1 = pos;
+	pos = pos + 1;
+	while (pos <len) 
+	{     
+		ch = WhatChar(text[pos]);
+		if (ch!= 1)   
+		{
+			if(ch != 2)
+			{
+				break;
+			}
+		}
+		pos= pos + 1;
+	} 
+	if (pos == pos1)
+	{ 
+		return nil;
+	} 
 	ret = nil
 	ret.word = strmid(text,pos1,pos);
 	ret.position = pos
+
 	return ret
 
 }
